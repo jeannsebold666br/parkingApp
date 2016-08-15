@@ -1,34 +1,22 @@
 <ion-view view-title="Register Vehicle" name="RegisterVehicleView">
-    <ion-content ng-controller="RegisterVehicleCtrl">                    
-        <!-- <label class="item item-input">
+    <ion-content ng-controller="VehicleCtrl">                    
+        <!-- <label class="item item-input padding">
             <span class="input-label">User Id</span>
-            <input type="text" ng-required="required" value="{{users.id}}" ng-readonly="users.id"></input>
-        </label> -->                   
+            <label>{{userId}}</label>
+        </label> -->                
         <label class="item item-input padding">
             <span class="input-label">Vehicle Type</span>
-        </label>                                
-        <label class="item item-input item-select padding">
-            <select>
-                <option name="vehicle-type" ng-repeat="vehicleType in vehicleTypes">{{vehicleType.type}}</option>                
-            </select>
+            <select ng-model="vehicleType" ng-options="vt as vt.vehicle_type_desc for vt in vehicleTypes track by vt.vehicle_type_desc" data-ng-change="vehicleTypeTrigger();"></select>
         </label>
         <label class="item item-input padding">
             <span class="input-label">Vehicle Manufacturer</span>
-        </label>                                
-        <label class="item item-input item-select padding">
-            <select>
-                <option name="vehicle-manufacturer" ng-repeat="vehicle in vehicles">{{vehicle.vehicleManufacturer}}</option>                
-            </select>
+            <select ng-model="vehicleMake" ng-options="vm as vm.vehicle_make for vm in vehicleMakes track by vm.vehicle_make" data-ng-change="vehicleMakeTrigger()"></select>
         </label>
         <label class="item item-input padding">
             <span class="input-label">Vehicle Model</span>
-        </label>                                
-        <label class="item item-input item-select padding">
-            <select>
-                <option name="vehicle-model" ng-repeat="vehicle in vehicles">{{vehicle.vehicleModel}}</option>                
-            </select>
+            <select ng-model="vehicleDesc" ng-options="vd as vd.vehicle_desc for vd in vehicleDescs track by vd.vehicle_desc"></select>
         </label>
-        <label class="item item-input item-stacked-label">
+        <label class="item item-input padding item-stacked-label">
             <span class="input-label">RTO Registration Number</span>
             <input type="text" ng-required="required"></input>
         </label>             

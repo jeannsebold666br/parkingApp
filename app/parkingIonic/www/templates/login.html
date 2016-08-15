@@ -13,6 +13,7 @@
                 </label>
             </label>            
             <div ng-controller="LoginCtrl" ng-if="option == 1">
+                <label>{{errorMessage}}</label>
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Email / Mobile</span>
                     <input type="text" placeholder="Email / Mobile" data-ng-model="login.input" required>
@@ -25,7 +26,7 @@
                     <button type="submit" class="button button-block button-positive" ng-click="tryLoginVerification()">Login!</button>
                 </div>
             </div>
-            <div ng-controller="AddUserCtrl" ng-if="option == 2">
+            <div ng-controller="UserCtrl" ng-if="option == 2">
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Username</span>
                     <input type="text" placeholder="Username"  data-ng-model="signup.username" required>

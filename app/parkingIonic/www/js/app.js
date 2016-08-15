@@ -63,7 +63,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'NewUserView': {
         templateUrl: 'templates/new-user.html',
-        controller: 'AddUserCtrl'
+        controller: 'UserCtrl'
       }
     }
   })
@@ -73,7 +73,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'NewVendorView': {
         templateUrl: 'templates/new-vendor.html',
-        controller: 'AddVendorCtrl'
+        controller: 'VendorCtrl'
       }
     }
   })
@@ -83,7 +83,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'NewParkingView': {
         templateUrl: 'templates/new-parking.html',
-        controller: 'AddParkingCtrl'
+        controller: 'ParkingCtrl'
       }
     }
   })
@@ -103,7 +103,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'AddTariffView': {
         templateUrl: 'templates/add-tariff.html',
-        controller: 'AddTariffCtrl'
+        controller: 'TariffCtrl'
       }
     }
   })
@@ -113,7 +113,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'RegisterVehicleView': {
         templateUrl: 'templates/register-vehicle.html',
-        controller: 'RegisterVehicleCtrl'
+        controller: 'VehicleCtrl'
       }
     }
   });

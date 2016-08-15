@@ -1,23 +1,22 @@
 <ion-view view-title="Add Tariff" name="AddTariffView">
-    <ion-content ng-controller="AddTariffCtrl">                    
+    <ion-content ng-controller="TariffCtrl">
         <label class="item item-input">
             <span class="input-label">Vendor Id</span>
-            <input type="text"  value="{{vendors.VendorId}}" ng-readonly="vendors.VendorId" data-ng-model="tariff.vendorId" required/>
+            <input type="text" ng-readonly="" data-ng-model="tariff.vendorId" required/>
         </label>
         <label class="item item-input">
             <span class="input-label">Agency Name</span>
-            <input type="text"  value="{{vendors.AgencyName}}" ng-readonly="vendors.AgencyName" data-ng-model="tariff.agencyName" required/>
-        </label>                     
+            <input type="text" data-ng-model="tariff.agencyName" required/> <!--ng-readonly=""-->
+        </label>
         <label class="item item-input padding">
             <span class="input-label">Vehicle Type</span>
-        </label>                                
-        <label>
-            {{tariff.vehicleTypes}}
-        </label>            
+            <select ng-model="vehicleType" ng-options="vt as vt.vehicle_type_desc for vt in vehicleTypes track by vt.vehicle_type_desc"></select>
+        </label>
         <label class="item item-input">
             <span class="input-label">Amount</span>
-            <input type="text" placeholder="Amount" data-ng-model="tariff.amount" required></label>
-        <div class="padding">          
+            <input type="text" placeholder="Amount" data-ng-model="tariff.amount" required/>
+        </label>
+        <div class="padding">
             <button type="button" class="button button-block button-positive">Save</button>
         </div>
     </ion-content>

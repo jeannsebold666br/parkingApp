@@ -1,5 +1,5 @@
 <ion-view view-title="Add a new Parking!" name="NewParkingView">
-    <ion-content ng-controller="AddParkingCtrl">
+    <ion-content ng-controller="ParkingCtrl">
         <form class="list" ng-app="" ng-init="ackData=false;">
             <!--<label class="item item-input">
                 <span class="input-label">Vendor Id</span>
@@ -11,7 +11,7 @@
             </label>
             <label class="item item-input">
                 <span class="input-label">GPS Location</span>
-                <input type="text" ng-required="required" value="{{latitude}} {{longitude}}" ng-readonly="{{latitude}} {{longitude}}"/>
+                <label>{{coords.latitude}},{{coords.longitude}}</label>
             </label>    
             <label class="item item-input">
                 <span class="input-label">Number of Parking Slots</span>                

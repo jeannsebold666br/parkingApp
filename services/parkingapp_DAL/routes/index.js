@@ -8,7 +8,7 @@ module.exports = {
     user_type: require('./user_type'),
     users: require('./users'),
     uservehicle: require('./uservehicle'),
-    //vehicle: require('./vehicle'),
+    vehicle: require('./vehicle'),
     vehicle_type: require('./vehicle_type'),
     vendor: require('./vendor'),
     workdays: require('./workdays')

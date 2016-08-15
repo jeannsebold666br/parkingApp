@@ -45,9 +45,15 @@ angular.module('starter.services', [])
       getUserVehicleDetailsById: '/uservehicle/{0}',
 
       getListAllVehiclesByVehicleType: '/vehicle/types/{0}',
-      getVehicleDescByVehicleMake: '/vehicle/make/{0}',
+
+      //getVehicleDescByVehicleMake: '/vehicle/make/{0}', //DEMO
+      getVehicleDescByVehicleMake: '/user_type/make/{0}',
+
       getVehicleDetailsById: '/vehicle/{0}',
-      getVehicleMakeByVehicleType: '/vehicle/type/{0}',
+
+      //getVehicleMakeByVehicleType: '/vehicle/type/{0}', //DEMO
+      getVehicleMakeByVehicleType: '/user_type/type/{0}',
+
       getVehiclesByVehicleType: '/vehicle/all/{0}',
 
       addVehicleType: '/vehicle_type/{0}',
@@ -81,16 +87,13 @@ angular.module('starter.services', [])
           return response;
         }).then(returnData)
         .then(function (data) {
-          alert("Get Results : " + data);
-          var results = data;   
-          return results;
+          return data;
         });
     }
 
     function returnData(res) {
-      if(res.data) {        
-        return JSON.stringify(res.data);      
-        //return res.data;
+      if(res.data) {            
+        return res.data;
       }
       throw new Error('Return data error ... ');
     }
@@ -675,57 +678,9 @@ angular.module('starter.services', [])
         return makeGetCall(serviceUrl);
       }
     };
-  });
+  })
 
-/*.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
-
-  // Some fake testing data
-  var chats = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx123',
-    lastText: 'Hey, it\'s me',
-    face: 'img/max.png'
-  }, {
-    id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'img/adam.jpg'
-  }, {
-    id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'img/perry.png'
-  }, {
-    id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/mike.png'
-  }];
-
-  return {
-    all: function() {
-      return chats;
-    },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
-    },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
-        }
-      }
-      return null;
-    }
-  };
-})
-
+/*
 .factory('Vendors', function() {
   // Might use a resource here that returns a JSON array
 
@@ -751,7 +706,7 @@ angular.module('starter.services', [])
     }
   };
 })
-
+*/
 .factory('Hours', function() {
   // Might use a resource here that returns a JSON array
 
@@ -874,7 +829,7 @@ angular.module('starter.services', [])
     }
   };
 })
-
+/*
 .factory('VehicleTypes', function() {
   // Might use a resource here that returns a JSON array
 
