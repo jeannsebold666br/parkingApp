@@ -5,6 +5,7 @@ angular.module('starter.controllers', ['ngCordova'])
     $scope.login = {};
     $scope.tryLoginVerification = function () {
       if ($scope.login.input != undefined && $scope.login.passkey != undefined) {
+        alert($scope.login.input + " " + $scope.login.passkey)
         var response = parkingappservice.getLoginVerified($scope.login.input, $scope.login.passkey)
         response.then(function (data) {
           if (Object.keys(data).length > 0) {
@@ -27,9 +28,22 @@ angular.module('starter.controllers', ['ngCordova'])
     };
   })
 
-  .controller('HomeCtrl', function ($scope, $rootScope) {
+  .controller('HomeCtrl', function ($scope, $rootScope, parkingappservice) {
     $rootScope.errorMessage = '';
     $scope.app = '';
+    $scope.getSampleAPI = function () {
+      var response = parkingappservice.getSampleAPI(1)
+      response.then(function (data) {
+        alert(data);
+        $scope.sampleAPIData = data;
+      })
+        .catch(function (error) {
+          if (error) {
+            return "Error: Could not get values." + error;
+          }
+        });
+    }
+
     /*google.maps.event.addDomListener(window, 'load', function () {
       var myLatlng = new google.maps.LatLng(13.082680199999999, 80.2707184);
   
@@ -87,6 +101,7 @@ angular.module('starter.controllers', ['ngCordova'])
       $scope.signup.usertype = 2;
       alert(JSON.stringify($scope.signup));
       if ($scope.signup.username != undefined && $scope.signup.firstname != undefined && $scope.signup.lastname != undefined && $scope.signup.email != undefined && $scope.signup.phoneno != undefined && $scope.signup.password != undefined) {
+        alert($scope.signup.username + " " + $scope.signup.phoneno + " " + $scope.signup.firstname + " " + $scope.signup.lastname + " " + $scope.signup.email + " " + $scope.signup.password + " " + $scope.signup.usertype);
         return parkingappservice.addUserDetails($scope.signup.username, $scope.signup.phoneno, $scope.signup.firstname, $scope.signup.lastname, $scope.signup.email, $scope.signup.password, $scope.signup.usertype).then(function () {
           alert("Success...!");
         })
@@ -98,7 +113,6 @@ angular.module('starter.controllers', ['ngCordova'])
     $scope.getAllUserDetails = function () {
       return parkingappservice.getAllUserDetails()
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -107,10 +121,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.getUserDetailsById = function () {
-      return parkingappservice.getUserDetailsById()
+    $scope.getUserDetailsById = function (id) {
+      alert(id);
+      return parkingappservice.getUserDetailsById(id)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -119,10 +133,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.deleteUserDetails = function () {
-      return parkingappservice.deleteUserDetails()
+    $scope.deleteUserDetails = function (userid, uid, upass) {
+      alert(userid + " " + uid + " " + upass);
+      return parkingappservice.deleteUserDetails(userid, uid, upass)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -131,10 +145,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.getUserDetailsByUserType = function () {
-      return parkingappservice.getUserDetailsByUserType()
+    $scope.getUserDetailsByUserType = function (usertype) {
+      alert(usertype);
+      return parkingappservice.getUserDetailsByUserType(usertype)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -143,10 +157,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.updateUserDetails = function () {
-      return parkingappservice.updateUserDetails()
+    $scope.updateUserDetails = function (userid, username, phoneno, firstname, lastname, email, userpass, usertype) {
+      alert(userid + " " + username + " " + phoneno + " " + firstname + " " + lastname + " " + email + " " + userpass + " " + usertype);
+      return parkingappservice.updateUserDetails(userid, username, phoneno, firstname, lastname, email, userpass, usertype)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -160,9 +174,10 @@ angular.module('starter.controllers', ['ngCordova'])
   .controller('VendorCtrl', function ($scope, $rootScope) {
     $rootScope.errorMessage = '';
     $scope.vendor = '';
-    $scope.addVendorDetails = function () {
+    $scope.addVendorDetails = function (userid, ownername, owneraddress, ownerlocationid) {
       alert(JSON.stringify($scope.vendor));
       if ($scope.vendor.agencyname != undefined && $scope.vendor.ownername != undefined && $scope.vendor.streetname != undefined && $scope.vendor.area != undefined && $scope.vendor.city != undefined && $scope.vendor.code != undefined && $scope.vendor.landmark != undefined) {
+        alert($scope.vendor.username + " " + $scope.vendor.phoneno + " " + $scope.vendor.firstname + " " + $scope.vendor.lastname + " " + $scope.vendor.email + " " + $scope.vendor.password + " " + $scope.vendor.usertype);
         return parkingappservice.addUserDetails($scope.vendor.username, $scope.vendor.phoneno, $scope.vendor.firstname, $scope.vendor.lastname, $scope.vendor.email, $scope.vendor.password, $scope.vendor.usertype).then(function () {
           alert("Success...!");
         })
@@ -172,10 +187,10 @@ angular.module('starter.controllers', ['ngCordova'])
       }
 
     };
-    $scope.deleteVendorDetails = function () {
-      return parkingappservice.deleteVendorDetails()
+    $scope.deleteVendorDetails = function (vendorid, uid, upass) {
+      alert(vendorid + " " + uid + " " + upass);
+      return parkingappservice.deleteVendorDetails(vendorid, uid, upass)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -184,10 +199,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.updateVendorDetails = function () {
-      return parkingappservice.updateVendorDetails()
+    $scope.updateVendorDetails = function (vendorid, userid, ownername, owneraddress, ownerlocationid) {
+      alert(vendorid + " " + userid + " " + ownername + " " + owneraddress + " " + ownerlocationid);
+      return parkingappservice.updateVendorDetails(vendorid, userid, ownername, owneraddress, ownerlocationid)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -196,10 +211,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.getVendorDetailsById = function () {
-      return parkingappservice.getVendorDetailsById()
+    $scope.getVendorDetailsById = function (vendorid) {
+      alert(vendorid);
+      return parkingappservice.getVendorDetailsById(vendorid)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -231,8 +246,9 @@ angular.module('starter.controllers', ['ngCordova'])
         $scope.serializeData = $scope.serializeData + "Sun";
       //return $scope.serializeData;
     }
-    $scope.getWorkdaysById = function () {
-      return parkingappservice.getWorkdaysById()
+    $scope.getWorkdaysById = function (workdaysid) {
+      alert(workdaysid);
+      return parkingappservice.getWorkdaysById(workdaysid)
         .then(function (data) {
           alert("Cntlr " + data);
           return data;
@@ -249,7 +265,7 @@ angular.module('starter.controllers', ['ngCordova'])
     $rootScope.errorMessage = '';
     $scope.hours = Hours.all();
     $scope.mins = Minutes.all();
-
+    $scope.ackData = false;
     $ionicPlatform.ready(function () {
       var posOptions = { timeout: 10000, enableHighAccuracy: true };
       $cordovaGeolocation.getCurrentPosition(posOptions)
@@ -259,31 +275,10 @@ angular.module('starter.controllers', ['ngCordova'])
           console.log("Get Location Error: " + err)
         });
     });
-    /*
-    $scope.ackData = false;
-    getPosition();
-    function getPosition() {
-
-      var options = {
-        enableHighAccuracy: true,
-        maximumAge: 3600000
-      }
-      //var watchID = 
-      navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
-
-      function onSuccess(position) {
-        $scope.latitude = position.coords.latitude;
-        $scope.longitude = position.coords.longitude;
-      };
-
-      function onError(error) {
-        alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
-      }
-    }*/
-    $scope.addParkingLotDetails = function () {
-      return parkingappservice.addParkingLotDetails()
+    $scope.addParkingLotDetails = function (parking_name, parking_vendor_id, parking_loc_id, parking_tariff_id, parking_slots, parking_from_time, parking_to_time, parking_workdays_id, parking_managed_status) {
+      alert(parking_name + " " + parking_vendor_id + " " + parking_loc_id + " " + parking_tariff_id + " " + parking_slots + " " + parking_from_time + " " + parking_to_time + " " + parking_workdays_id + " " + parking_managed_status);
+      return parkingappservice.addParkingLotDetails(parking_name, parking_vendor_id, parking_loc_id, parking_tariff_id, parking_slots, parking_from_time, parking_to_time, parking_workdays_id, parking_managed_status)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -292,10 +287,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.deleteParkingLotDetails = function () {
-      return parkingappservice.deleteParkingLotDetails()
+    $scope.deleteParkingLotDetails = function (parkingid, uid, upass) {
+      alert(parkingid + " " + uid + " " + upass);
+      return parkingappservice.deleteParkingLotDetails(parkingid, uid, upass)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -304,10 +299,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.updateParkingLotDetails = function () {
-      return parkingappservice.updateParkingLotDetails()
+    $scope.updateParkingLotDetails = function (parkingid, parking_vendor_id, parking_name, parking_loc_id, parking_tariff_id, parking_slots, parking_from_time, parking_to_time, parking_workdays_id, parking_managed_status) {
+      alert(parkingid + " " + parking_vendor_id + " " + parking_name + " " + parking_loc_id + " " + parking_tariff_id + " " + parking_slots + " " + parking_from_time + " " + parking_to_time + " " + parking_workdays_id + " " + parking_managed_status);
+      return parkingappservice.updateParkingLotDetails(parkingid, parking_vendor_id, parking_name, parking_loc_id, parking_tariff_id, parking_slots, parking_from_time, parking_to_time, parking_workdays_id, parking_managed_status)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -316,10 +311,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.getParkingLotDetailsById = function () {
-      return parkingappservice.getParkingLotDetailsById()
+    $scope.getParkingLotDetailsById = function (parkingid) {
+      alert(parkingid);
+      return parkingappservice.getParkingLotDetailsById(parkingid)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -328,7 +323,6 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-
   })
 
   .controller('TariffCtrl', function ($scope, $rootScope, parkingappservice) {
@@ -348,21 +342,23 @@ angular.module('starter.controllers', ['ngCordova'])
     }
     $scope.getListAllVehicleTypes();
 
-    $scope.addTariffDetails = function () {
+    $scope.addTariffDetails = function (locationid, vehicletypeid, tariffamount) {
       alert(JSON.stringify($scope.tariff));
-      if ($scope.tariff.agencyname != undefined && $scope.tariff.ownername != undefined && $scope.tariff.streetname != undefined && $scope.tariff.area != undefined && $scope.tariff.city != undefined && $scope.tariff.code != undefined && $scope.tariff.landmark != undefined) {
-        return parkingappservice.addUserDetails($scope.tariff.username, $scope.tariff.phoneno, $scope.tariff.firstname, $scope.tariff.lastname, $scope.tariff.email, $scope.tariff.password, $scope.tariff.usertype).then(function () {
-          alert("Success...!");
-        })
+      if ($scope.tariff.locationid != undefined && $scope.tariff.vehicletypeid != undefined && $scope.tariff.tariffamount != undefined) {
+        alert(locationid + " " + vehicletypeid + " " + tariffamount);
+        return parkingappservice.addUserDetails(locationid, vehicletypeid, tariffamount)
+          .then(function () {
+            alert("Success...!");
+          })
       }
       else {
         alert("Input Invalid!");
       }
     };
-    $scope.deleteTariffDetails = function () {
-      return parkingappservice.deleteTariffDetails()
+    $scope.deleteTariffDetails = function (tariffid, uid, upass) {
+      alert(tariffid + " " + uid + " " + upass);
+      return parkingappservice.deleteTariffDetails(tariffid, uid, upass)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -371,10 +367,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.getTariffDetailsByID = function () {
-      return parkingappservice.getTariffDetailsByID()
+    $scope.getTariffDetailsByID = function (tariffid) {
+      alert(tariffid);
+      return parkingappservice.getTariffDetailsByID(tariffid)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -383,10 +379,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.updateTariffDetails = function () {
-      return parkingappservice.updateTariffDetails()
+    $scope.updateTariffDetails = function (tariffid, locationid, vehicletypeid, tariffamount) {
+      alert(tariffid + " " + locationid + " " + vehicletypeid + " " + tariffamount);
+      return parkingappservice.updateTariffDetails(tariffid, locationid, vehicletypeid, tariffamount)
         .then(function (data) {
-          alert("Cntlr " + data);
           return data;
         })
         .catch(function (error) {
@@ -418,6 +414,7 @@ angular.module('starter.controllers', ['ngCordova'])
         });
     }
     $scope.getVehicleMakeByVehicleType = function (vehicleType) {
+      alert(vehicleType);
       var response = parkingappservice.getVehicleMakeByVehicleType(vehicleType)
       response.then(function (data) {
         $scope.vehicleMakes = data;
@@ -429,6 +426,7 @@ angular.module('starter.controllers', ['ngCordova'])
         });
     }
     $scope.getVehicleDescByVehicleMake = function (vehicleMake) {
+      alert(vehicleMake);
       var response = parkingappservice.getVehicleDescByVehicleMake(vehicleMake)
       response.then(function (data) {
         $scope.vehicleDescs = data;
@@ -455,10 +453,10 @@ angular.module('starter.controllers', ['ngCordova'])
       }
     }
 
-    $scope.addUserVehicleDetails = function () {
-      return parkingappservice.addUserVehicleDetails()
-        .then(function (data) {
-          alert("Cntlr " + data);
+    $scope.addUserVehicleDetails = function (userid, vehicledimensionid, regnum) {
+      alert(userid + " " + vehicledimensionid + " " + regnum);
+      return parkingappservice.addUserVehicleDetails(userid, vehicledimensionid, regnum)
+        .then(function (data) {          
           return data;
         })
         .catch(function (error) {
@@ -467,10 +465,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.deleteUserVehicleDetails = function () {
-      return parkingappservice.deleteUserVehicleDetails()
-        .then(function (data) {
-          alert("Cntlr " + data);
+    $scope.deleteUserVehicleDetails = function (userid, carid, uid, upass) {
+      alert(userid + " " + carid + " " + uid + " " + upass);
+      return parkingappservice.deleteUserVehicleDetails(userid, carid, uid, upass)
+        .then(function (data) {          
           return data;
         })
         .catch(function (error) {
@@ -479,10 +477,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.getUserVehicleDetailsById = function () {
-      return parkingappservice.getUserVehicleDetailsById()
-        .then(function (data) {
-          alert("Cntlr " + data);
+    $scope.getUserVehicleDetailsById = function (uservehicleid) {
+      alert(uservehicleid);
+      return parkingappservice.getUserVehicleDetailsById(uservehicleid)
+        .then(function (data) {          
           return data;
         })
         .catch(function (error) {
@@ -491,10 +489,10 @@ angular.module('starter.controllers', ['ngCordova'])
           }
         });
     };
-    $scope.updateUserVehicleDetails = function () {
-      return parkingappservice.updateUserVehicleDetails()
-        .then(function (data) {
-          alert("Cntlr " + data);
+    $scope.updateUserVehicleDetails = function (userid, carid, vehicledimensionid, regnum) {
+      alert(userid + " " + carid + " " + vehicledimensionid + " " + regnum);
+      return parkingappservice.updateUserVehicleDetails(userid, carid, vehicledimensionid, regnum)
+        .then(function (data) {          
           return data;
         })
         .catch(function (error) {

@@ -5,10 +5,12 @@ exports.getUserDetails = function(req, res) {
   
     pool.getConnection(function(err, connection){
         if (err) {
-          connection.release();
-          res.json({"code" : 503, "status" : "Error connecting to database.. :("});
-          return;
-        }   
+            //connection.release();
+            //res.json({"code" : 503, "status" : "Error creating connection to database.. :("});
+            //return;
+            var error = { "code": 503, "status": "Error creating connection to database.. :(" + err};
+            return error;
+        } 
 
         console.log('Connected as Thread Id: ' + connection.threadId);
 
@@ -41,13 +43,19 @@ exports.getUserDetailsById = function(req, res) {
     console.log("Data Request Id: " + req);
 
     pool.getConnection(function(err, connection){
+        // if (err) {
+        //     //connection.release();
+        //     var db_conn_error = JSON.stringify({"code" : 503, "status" : "Error connecting to database.. :("});
+        //     console.log(db_conn_error); 
+        //     return res(null, db_conn_error); 
+        // }   
         if (err) {
             //connection.release();
-            var db_conn_error = JSON.stringify({"code" : 503, "status" : "Error connecting to database.. :("});
-            console.log(db_conn_error); 
-            return res(null, db_conn_error); 
-        }   
-
+            //res.json({"code" : 503, "status" : "Error creating connection to database.. :("});
+            //return;
+            var error = { "code": 503, "status": "Error creating connection to database.. :(" + err};
+            return error;
+        } 
         console.log('Connected as Thread Id: ' + connection.threadId);
 
         connection.query("CALL spGetUserDetailsById(" + connection.escape(req) + ");", function(err, rows){          
@@ -162,7 +170,7 @@ exports.getUserDetailsByUserType = function(req, res) {
 
     pool.getConnection(function(err, connection){
         if (err) {
-            connection.release();
+            //connection.release();
             res.json({"code" : 503, "status" : "Error connecting to database.. :("});
             return;
         }   

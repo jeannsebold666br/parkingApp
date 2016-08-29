@@ -14,8 +14,12 @@
             <h4 class="title">Home</h4>
         </label>    
         <div class="padding">          
-            <a href="http://192.168.10.5:7337/users/1"><button type="submit" class="button button-block button-energized">Demo API CALL</button></a>
+            <button type="submit" class="button button-block button-energized" ng-click="getSampleAPI()">Demo API CALL</button>
+            {{sampleApiData}}
         </div> 
+        <label class="item item-input" style="margin: 15px; border: 1px solid #000;">
+                <input type="text" value="Search" ng-required="required" style="font-weight: 600; color: #000; font-size: 20px;">
+            </label>
         <div id="map" data-tap-disabled="true"></div>
     </ion-content>
 </ion-view>
